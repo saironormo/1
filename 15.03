@@ -1,0 +1,5851 @@
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class canary {
+public:
+
+int current_inspiration;
+int max_inspiration;
+string name;
+int strength;
+int item;
+ void create_canary(int c_i, int m_i, string n, int s, int i)
+{
+current_inspiration = c_i;
+max_inspiration = m_i;
+name = n;
+strength = s;
+item = i;
+}
+
+void attack1(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - 3;
+cout << a.name << " воинственно размахивает крыльями. " << b.name << " теряет " << 3 << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+
+}
+
+};
+
+class evolution
+{
+public:
+	void attack2(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*2;
+cout << a.name << " демонстрирует свои прекрасные перья. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class country
+{public:
+	void attack2(canary &a, canary &b)
+{
+a.current_inspiration = a.current_inspiration + a.strength*2;
+if (a.current_inspiration > a.max_inspiration)
+	a.current_inspiration = a.max_inspiration;
+cout << a.name << " насвистывает гимн своей страны. " << a.name << " восстанавливает " << a.strength << " единиц вдохновения. У " << a.name << " остаётся " << a.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+
+class dem
+{
+public:
+	void attack3(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*3;
+cout << a.name << " проводит ужасный ритуал, после которого на траве остаётся выжженный след. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+
+};
+
+class crim
+{ public:
+	void attack3(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*3;
+cout << a.name << " прожигает " << b.name << " тяжёлым взглядом. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class fot
+{ public:
+	void attack3(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*3;
+cout << a.name << " показывает " << b.name << " фотографии мест, куда более живописных, чем то, за которое идёт сражение. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+
+class hands
+{ public:
+	void attack3(canary &a, canary &b)
+{ 
+	if (b.item == 1)
+{   b.item = 0;
+	a.item = 1;
+	cout << a.name << " отбирает у " << b.name << " пистолет";
+	cout << endl;}
+	else if (b.item == 2)
+{   b.item = 0;
+	a.item = 2;
+	cout << a.name << " отбирает у " << b.name << " катану";
+	cout << endl;}
+	else if (b.item == 0)
+{   b.item = 1;
+	cout << a.name << " отбирает у " << b.name << " отсутствие оружия, а затем выкидывает эту абстракцию за пределы мира, где ей самое место. У " << b.name << " больше нет отсутствия оружия, зато есть пистолет.";
+	cout << endl;}
+
+}
+};
+
+
+class fen
+{ public:
+	void attack3(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*3;
+cout << a.name << " читает занудную лекцию по биологии. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class ha
+{ public:
+	void attack3(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*3;
+cout << a.name << " показывает своего прекрасного ежа и говорит, что территория нужна в первую очередь ему. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+
+
+class pr: public canary, public country, public dem
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " призывает демона. Окружающие территории уже не выглядят такими уж подходящими для проживания. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class ill: public canary, public country, public dem
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - 100000;
+cout << a.name << " сотворяет иллюзию. Территория теперь выглядит выжженной пустыней. " << b.name << " теряет " << 100000 << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class maf: public canary, public country, public crim
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " хвастается своими криминальными связями. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class ya: public canary, public country, public crim
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " грозно ругается на непонятном языке. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class fot1: public canary, public country, public fot
+{public:
+	void attack4(canary &a, canary &b)
+{
+a.current_inspiration = a.current_inspiration + a.strength*2;
+if (a.current_inspiration > a.max_inspiration)
+	a.current_inspiration = a.max_inspiration;
+cout << a.name << " любуется своими фотографиями. Ну разве может такая замечательная канарейка не заслуживать эти территории? " << a.name << " восстанавливает " << a.strength << " единиц вдохновения. У " << a.name << " остаётся " << a.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class fot2: public canary, public country, public fot
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " показывает " << b.name << "компроментирующие фотографии" << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class hands1: public canary, public evolution, public hands
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " хвастается бицепцами. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class hands2: public canary, public evolution, public hands
+{ public:
+	void attack4(canary &a, canary &b)
+{if (a.item == 0)
+	{cout << "Сложно демонстрировать навыки владения оружием, когда оружия нет. Ничего не происходит.";
+	cout << endl;}
+	if (a.item == 1)
+{b.current_inspiration = b.current_inspiration - a.strength*8;
+cout << a.name << " грациозно стреляет из пистолета в воздух. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;}
+		if (a.item == 2)
+{b.current_inspiration = b.current_inspiration - a.strength*8;
+cout << a.name << " грациозно размахивает катаной. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;}
+}
+};
+
+class fen1: public canary, public evolution, public fen
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " дышит огнём и случайно сжигает дерево. Территория теряет свою привлекательность, а " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class fen2: public canary, public evolution, public fen
+{public:
+	void attack4(canary &a, canary &b)
+{
+a.current_inspiration = a.current_inspiration + a.strength*4;
+if (a.current_inspiration > a.max_inspiration)
+	a.current_inspiration = a.max_inspiration;
+cout << a.name << " возрождает своё вдохновение из пепла. " << a.name << " восстанавливает " << a.strength << " единиц вдохновения. У " << a.name << " остаётся " << a.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+
+class ha1: public canary, public evolution, public ha
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " катается на своём еже. От невыносимой зависти " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+class ha2: public canary, public evolution, public ha
+{ public:
+	void attack4(canary &a, canary &b)
+{
+b.current_inspiration = b.current_inspiration - a.strength*4;
+cout << a.name << " берёт своего ежа в лапки и взмывает в воздух. Ёж, в свою очередь, держит плакат с просьбой отдать территорию. " << b.name << " теряет " << a.strength << " единиц вдохновения. У " << b.name << " остаётся " << b.current_inspiration << " единиц вдохновения.";
+cout << endl;
+}
+};
+
+
+
+
+int main()
+{   setlocale(LC_ALL, "Russian");
+int a, b, c, i, j;
+string n, n1;
+i = 0;
+cout << "В одной прекрасной стране живут лишь канарейки. Иногда они встречаются и, вдохновлённые прекрасными видами, начинают бороться за территорию, на которой сейчас находятся. Как только канарейка теряет всё вдохновление, она улетает — это считается поражением. Рассмотрим типичную встречу двух канареек. Как зовут первую? Важно помнить, что имена канареек не склоняются и пишутся латиницей.";
+cout << endl;
+cin >> n;
+cout << n << ", как и всё канарейки, умеет воинственно размахивать крыльями. Это первое возможное действие.";
+cout << endl;
+cout << "В какой-то момент общество канареек разделилось на две части: половина из них организовала свою страну, а оставшиеся стали эволюционировать без чётко выраженного общественного строя. ";
+cout << endl;
+cout << "Введите 1, если " << n << " следует первому пути.";
+cout << endl;
+cout << "Введите 2, если " << n << " следует второму пути.";
+cout << endl;
+cin >> a;
+
+if (a == 1)
+{
+cout << "Канарейки — патриоты своей страны и отличные певцы. Исполнение гимна — второе возможное действие для " << n << ".";
+cout << endl;
+cout << "Канарейки в местных городах делятся на три основных вида: демонологи, криминальные элементы и фотографы. Удивительная система.";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cout << "Введите 3, если " << n << " относится к третьему виду.";
+cout << endl;
+cin >> b;
+
+if (b == 1)
+{cout << "Любой уважающий себя демонолог умеет проводить жуткий ритуал — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Демонологи делятся на два вида: призыватели и иллюзионисты. Есть мнение, что последние как-то связаны с местным буддизмом.";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "Как ни странно, но призыватели умеют призывать демонов. Это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Иллюзионист — любимый мой класс. Чтобы победить, им достаточно лишь воспользоваться четвёртым своим действием — создать иллюзию.";
+cout << endl;}
+
+}
+
+if (b == 2)
+{cout << "Криминальные элементы, как известно, умеют прожигать людей тяжёлым взглядом — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Криминальные элементы могут состоять в рядах мафии или якудза.";
+cout << endl;
+cout << "Введите 1, если " << n << " состоит в рядах мафии.";
+cout << endl;
+cout << "Введите 2, если " << n << " состоит в рядах якудза.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout <<  n << " , как и любой мафиози, имеет пистолет — жаль, что вместо рук у канареек крылья. Вместо использования пистолета " << n << " может хвастаться своими криминальными связями — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout <<  n << " , как и любой мафиози, имеет катану — жаль, что вместо рук у канареек крылья. Вместо использования катаны " << n << " может грозно разговаривать на странном языке — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+}
+
+if (b == 3)
+{cout << "Канарейки-фотографы могут показывать фотографии других чудных мест, заставляя своих оппонентом задуматься о том, что им не так уж и нужна территория, за которую сейчас идёт сражение — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Фотографы могут фотографировать себя, а могут фотографировать других. Чем занимается " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " предпочитает фотографировать себя.";
+cout << endl;
+cout << "Введите 2, если " << n << " предпочитает фотографировать остальных.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << n << " знает ракурсы, с которых получается лучше всего. Он умеет поднять себе настроение, разглядывая собственные фотографии, — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << n << " собрал уйму компромата на любого возможного противника. Шантаж — это плохо, но именно он становится четвёртым возможным действием для " << n << ".";
+	cout << endl;}
+}
+
+
+}
+
+if (a == 2)
+{
+cout << "Эволюция делает перья канареек всё красивее, и канарейки просто обожают это демонстрировать. Демонстрация перьев — второе возможное действие для " << n << ".";
+cout << endl;
+cout << "Эволюционировавшие канарейки делятся на три основных вида: с сильными кулаками, фениксы и вступившие в симбиоз с ежами. Природа — загадочная штука";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cout << "Введите 3, если " << n << " относится к третьему виду.";
+cout << endl;
+cin >> b;
+
+if (b == 1)
+{cout << "Лишь редкие канарейки имеют руки. Большая сила — большая ответственность. Третье возможное действие для " << n << " — забрать оружие у своего оппонента. Ради его безопасности, конечно же. ";
+cout << endl;
+cout << "Канарейки с руками могут продолжить развивать физическую силу, а могут изучать оружие. Чем занимается " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " развивает физическую силу.";
+cout << endl;
+cout << "Введите 2, если " << n << " изучает оружие.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "У " << n << " прекрасные бицепцы, и " << n << " не стесняется их демонстрировать — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Теперь " << n << " владеет любыми видами оружия. Владеет — значит умеет пользоваться; никакого оружия у " << n << " нет. Продемонстрировать свои навыки владения оружием — четвёртое действие для " << n << ". Если " << n << ", конечно, раздобудет что-нибудь подходящее.";
+cout << endl;}
+
+}
+
+if (b == 2)
+{cout << "Фениксы тоже являются канарейками, причём с удовольствием приводят биологическое обоснование этого факта. Показать своё превосходство в биологии — третье возможное действие для  " << n << ".";
+cout << endl;
+cout << "Фениксы умеют или управлять огнём, или возрождать своё вдохновление из пепла. Да, только что-то одно. Баланс.";
+cout << endl;
+cout << "Введите 1, если " << n << " управляет огнём.";
+cout << endl;
+cout << "Введите 2, если " << n << " возрождает своё вдохновление из пепла.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout <<  "Четвёртое возможное действие для " << n << " — выдыхать пламя.";
+	cout << endl;}
+
+if (c == 2)
+{cout <<  "Четвёртое возможное действие для " << n << " — возрождать своё вдохновение из пепла.";
+	cout << endl;}
+}
+
+if (b == 3)
+{cout << "Симбиоз с ежами — полезная штука. Третье возможное действие для " << n << " — продемонстрировать своего ежа и сказать, что эта территория им нужнее.";
+cout << endl;
+cout << "Некоторые канарейки становятся наездниками на ежах, а некоторые сами поднимают своих ежей в воздух. Какая судьба ждёт " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " ездит на своём еже.";
+cout << endl;
+cout << "Введите 2, если " << n << " таскает ежа в своих лапках.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "У *имя* есть свой ездовой еж. Прокатиться на нём — четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Четвёртое возможное действие для " << n << " — поднять своего ежа в воздух. Ни один ёж при этом не пострадает." ;
+	cout << endl;}
+
+}
+}
+
+if (a == 1 && b == 1 && c == 1)
+i = 1;
+if (a == 1 && b == 1 && c == 2)
+i = 2;
+if (a == 1 && b == 2 && c == 1)
+i = 3;
+if (a == 1 && b == 2 && c == 2)
+i = 4;
+if (a == 1 && b == 3 && c == 1)
+i = 5;
+if (a == 1 && b == 3 && c == 2)
+i = 6;
+if (a == 2 && b == 1 && c == 1)
+i = 7;
+if (a == 2 && b == 1 && c == 2)
+i = 8;
+if (a == 2 && b == 2 && c == 1)
+i = 9;
+if (a == 2 && b == 2 && c == 2)
+i = 10;
+if (a == 2 && b == 3 && c == 1)
+i = 11;
+if (a == 2 && b == 3 && c == 2)
+i = 12;
+
+n1 = n;
+cout << "А теперь займёмся второй канарейкой. Введите её имя.";
+cout << endl;
+cin >> n;
+cout << n << ", как и всё канарейки, умеет воинственно размахивать крыльями. Это первое возможное действие.";
+cout << endl;
+cout << "В какой-то момент общество канареек разделилось на две части: половина из них организовала свою страну, а оставшиеся стали эволюционировать без чётко выраженного общественного строя. ";
+cout << endl;
+cout << "Введите 1, если " << n << " следует первому пути.";
+cout << endl;
+cout << "Введите 2, если " << n << " следует второму пути.";
+cout << endl;
+cin >> a;
+
+if (a == 1)
+{
+cout << "Канарейки — патриоты своей страны и отличные певцы. Исполнение гимна — второе возможное действие для " << n << ".";
+cout << endl;
+cout << "Канарейки в местных городах делятся на три основных вида: демонологи, криминальные элементы и фотографы. Удивительная система.";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cout << "Введите 3, если " << n << " относится к третьему виду.";
+cout << endl;
+cin >> b;
+
+if (b == 1)
+{cout << "Любой уважающий себя демонолог умеет проводить жуткий ритуал — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Демонологи делятся на два вида: призыватели и иллюзионисты. Есть мнение, что последние как-то связаны с местным буддизмом.";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "Как ни странно, но призыватели умеют призывать демонов. Это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Иллюзионист — любимый мой класс. Чтобы победить, им достаточно лишь воспользоваться четвёртым своим действием — создать иллюзию.";
+cout << endl;}
+
+}
+
+if (b == 2)
+{cout << "Криминальные элементы, как известно, умеют прожигать людей тяжёлым взглядом — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Криминальные элементы могут состоять в рядах мафии или якудза.";
+cout << endl;
+cout << "Введите 1, если " << n << " состоит в рядах мафии.";
+cout << endl;
+cout << "Введите 2, если " << n << " состоит в рядах якудза.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout <<  n << " , как и любой мафиози, имеет пистолет — жаль, что вместо рук у канареек крылья. Вместо использования пистолета " << n << " может хвастаться своими криминальными связями — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout <<  n << " , как и любой мафиози, имеет катану — жаль, что вместо рук у канареек крылья. Вместо использования катаны " << n << " может грозно разговаривать на странном языке — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+}
+
+if (b == 3)
+{cout << "Канарейки-фотографы могут показывать фотографии других чудных мест, заставляя своих оппонентом задуматься о том, что им не так уж и нужна территория, за которую сейчас идёт сражение — это третье возможное действие для " << n << ".";
+cout << endl;
+cout << "Фотографы могут фотографировать себя, а могут фотографировать других. Чем занимается " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " предпочитает фотографировать себя.";
+cout << endl;
+cout << "Введите 2, если " << n << " предпочитает фотографировать остальных.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << n << " знает ракурсы, с которых получается лучше всего. Он умеет поднять себе настроение, разглядывая собственные фотографии, — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << n << " собрал уйму компромата на любого возможного противника. Шантаж — это плохо, но именно он становится четвёртым возможным действием для " << n << ".";
+	cout << endl;}
+}
+
+
+}
+
+if (a == 2)
+{
+cout << "Эволюция делает перья канареек всё красивее, и канарейки просто обожают это демонстрировать. Демонстрация перьев — второе возможное действие для " << n << ".";
+cout << endl;
+cout << "Эволюционировавшие канарейки делятся на три основных вида: с сильными кулаками, фениксы и вступившие в симбиоз с ежами. Природа — загадочная штука";
+cout << endl;
+cout << "Введите 1, если " << n << " относится к первому виду.";
+cout << endl;
+cout << "Введите 2, если " << n << " относится ко второму виду.";
+cout << endl;
+cout << "Введите 3, если " << n << " относится к третьему виду.";
+cout << endl;
+cin >> b;
+
+if (b == 1)
+{cout << "Лишь редкие канарейки имеют руки. Большая сила — большая ответственность. Третье возможное действие для " << n << " — забрать оружие у своего оппонента. Ради его безопасности, конечно же. ";
+cout << endl;
+cout << "Канарейки с руками могут продолжить развивать физическую силу, а могут изучать оружие. Чем занимается " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " развивает физическую силу.";
+cout << endl;
+cout << "Введите 2, если " << n << " изучает оружие.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "У " << n << " прекрасные бицепцы, и " << n << " не стесняется их демонстрировать — это четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Теперь " << n << " владеет любыми видами оружия. Владеет — значит умеет пользоваться; никакого оружия у " << n << " нет. Продемонстрировать свои навыки владения оружием — четвёртое действие для " << n << ". Если " << n << ", конечно, раздобудет что-нибудь подходящее.";
+cout << endl;}
+
+}
+
+if (b == 2)
+{cout << "Фениксы тоже являются канарейками, причём с удовольствием приводят биологическое обоснование этого факта. Показать своё превосходство в биологии — третье возможное действие для  " << n << ".";
+cout << endl;
+cout << "Фениксы умеют или управлять огнём, или возрождать своё вдохновление из пепла. Да, только что-то одно. Баланс.";
+cout << endl;
+cout << "Введите 1, если " << n << " управляет огнём.";
+cout << endl;
+cout << "Введите 2, если " << n << " возрождает своё вдохновление из пепла.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout <<  "Четвёртое возможное действие для " << n << " — выдыхать пламя.";
+	cout << endl;}
+
+if (c == 2)
+{cout <<  "Четвёртое возможное действие для " << n << " — возрождать своё вдохновение из пепла.";
+	cout << endl;}
+}
+
+if (b == 3)
+{cout << "Симбиоз с ежами — полезная штука. Третье возможное действие для " << n << " — продемонстрировать своего ежа и сказать, что эта территория им нужнее.";
+cout << endl;
+cout << "Некоторые канарейки становятся наездниками на ежах, а некоторые сами поднимают своих ежей в воздух. Какая судьба ждёт " << n << "?";
+cout << endl;
+cout << "Введите 1, если " << n << " ездит на своём еже.";
+cout << endl;
+cout << "Введите 2, если " << n << " таскает ежа в своих лапках.";
+cout << endl;
+cin >> c;
+if (c == 1)
+{cout << "У *имя* есть свой ездовой еж. Прокатиться на нём — четвёртое возможное действие для " << n << ".";
+	cout << endl;}
+
+if (c == 2)
+{cout << "Четвёртое возможное действие для " << n << " — поднять своего ежа в воздух. Ни один ёж при этом не пострадает." ;
+	cout << endl;}
+
+}
+}
+
+if (a == 1 && b == 1 && c == 1)
+j = 1;
+if (a == 1 && b == 1 && c == 2)
+j = 2;
+if (a == 1 && b == 2 && c == 1)
+j = 3;
+if (a == 1 && b == 2 && c == 2)
+j = 4;
+if (a == 1 && b == 3 && c == 1)
+j = 5;
+if (a == 1 && b == 3 && c == 2)
+j = 6;
+if (a == 2 && b == 1 && c == 1)
+j = 7;
+if (a == 2 && b == 1 && c == 2)
+j = 8;
+if (a == 2 && b == 2 && c == 1)
+j = 9;
+if (a == 2 && b == 2 && c == 2)
+j = 10;
+if (a == 2 && b == 3 && c == 1)
+j = 11;
+if (a == 2 && b == 3 && c == 2)
+j = 12;
+
+
+pr pr1;
+pr1.create_canary(100, 100, n1, 5, 0);
+ill ill1;
+ill1.create_canary(100, 100, n1, 5, 0);
+maf maf1;
+maf1.create_canary(100, 100, n1, 5, 1);
+ya ya1;
+ya1.create_canary(100, 100, n1, 5, 2);
+fot1 fot11;
+fot11.create_canary(100, 100, n1, 5, 0);
+fot2 fot21;
+fot21.create_canary(100, 100, n1, 5, 0);
+hands1 hands11;
+hands11.create_canary(100, 100, n1, 5, 0);
+hands2 hands21;
+hands21.create_canary(100, 100, n1, 5, 0);
+fen1 fen11;
+fen11.create_canary(100, 100, n1, 5, 0);
+fen2 fen21;
+fen21.create_canary(100, 100, n1, 5, 0);
+ha1 ha11;
+ha11.create_canary(100, 100, n1, 5, 0);
+ha2 ha21;
+ha21.create_canary(100, 100, n1, 5, 0);
+
+pr pr2;
+pr2.create_canary(100, 100, n, 5, 0);
+ill ill2;
+ill2.create_canary(100, 100, n, 5, 0);
+maf maf2;
+maf2.create_canary(100, 100, n, 5, 1);
+ya ya2;
+ya2.create_canary(100, 100, n, 5, 2);
+fot1 fot12;
+fot12.create_canary(100, 100, n, 5, 0);
+fot2 fot22;
+fot22.create_canary(100, 100, n, 5, 0);
+hands1 hands12;
+hands12.create_canary(100, 100, n, 5, 0);
+hands2 hands22;
+hands22.create_canary(100, 100, n, 5, 0);
+fen1 fen12;
+fen12.create_canary(100, 100, n, 5, 0);
+fen2 fen22;
+fen22.create_canary(100, 100, n, 5, 0);
+ha1 ha12;
+ha11.create_canary(100, 100, n, 5, 0);
+ha2 ha22;
+ha21.create_canary(100, 100, n, 5, 0);
+
+cout << "Да начнётся битва!" ;
+cout << endl;
+int r; 
+
+if (i == 1)
+{ if (j == 1)
+{while (pr1.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, pr2);
+if (r == 2)
+pr1.attack2(pr1, pr2);
+if (r == 3)
+pr1.attack3(pr1, pr2);
+if (r == 4)
+pr1.attack4(pr1, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, pr1);
+if (r == 2)
+pr2.attack2(pr2, pr1);
+if (r == 3)
+pr2.attack3(pr2, pr1);
+if (r == 4)
+pr2.attack4(pr2, pr1);
+}
+if (pr1.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (pr1.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, ill2);
+if (r == 2)
+pr1.attack2(pr1, ill2);
+if (r == 3)
+pr1.attack3(pr1, ill2);
+if (r == 4)
+pr1.attack4(pr1, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, pr1);
+if (r == 2)
+ill2.attack2(ill2, pr1);
+if (r == 3)
+ill2.attack3(ill2, pr1);
+if (r == 4)
+ill2.attack4(ill2, pr1);
+}
+if (pr1.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (pr1.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, maf2);
+if (r == 2)
+pr1.attack2(pr1, maf2);
+if (r == 3)
+pr1.attack3(pr1, maf2);
+if (r == 4)
+pr1.attack4(pr1, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, pr1);
+if (r == 2)
+maf2.attack2(maf2, pr1);
+if (r == 3)
+maf2.attack3(maf2, pr1);
+if (r == 4)
+maf2.attack4(maf2, pr1);
+}
+if (pr1.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (pr1.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, ya2);
+if (r == 2)
+pr1.attack2(pr1, ya2);
+if (r == 3)
+pr1.attack3(pr1, ya2);
+if (r == 4)
+pr1.attack4(pr1, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, pr1);
+if (r == 2)
+ya2.attack2(ya2, pr1);
+if (r == 3)
+ya2.attack3(ya2, pr1);
+if (r == 4)
+ya2.attack4(ya2, pr1);
+}
+if (pr1.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (pr1.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, fot12);
+if (r == 2)
+pr1.attack2(pr1, fot12);
+if (r == 3)
+pr1.attack3(pr1, fot12);
+if (r == 4)
+pr1.attack4(pr1, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, pr1);
+if (r == 2)
+fot12.attack2(fot12, pr1);
+if (r == 3)
+fot12.attack3(fot12, pr1);
+if (r == 4)
+fot12.attack4(fot12, pr1);
+}
+if (pr1.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (pr1.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, fot22);
+if (r == 2)
+pr1.attack2(pr1, fot22);
+if (r == 3)
+pr1.attack3(pr1, fot22);
+if (r == 4)
+pr1.attack4(pr1, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, pr1);
+if (r == 2)
+fot22.attack2(fot22, pr1);
+if (r == 3)
+fot22.attack3(fot22, pr1);
+if (r == 4)
+fot22.attack4(fot22, pr1);
+}
+if (pr1.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (pr1.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, hands12);
+if (r == 2)
+pr1.attack2(pr1, hands12);
+if (r == 3)
+pr1.attack3(pr1, hands12);
+if (r == 4)
+pr1.attack4(pr1, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, pr1);
+if (r == 2)
+hands12.attack2(hands12, pr1);
+if (r == 3)
+hands12.attack3(hands12, pr1);
+if (r == 4)
+hands12.attack4(hands12, pr1);
+}
+if (pr1.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (pr1.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, hands22);
+if (r == 2)
+pr1.attack2(pr1, hands22);
+if (r == 3)
+pr1.attack3(pr1, hands22);
+if (r == 4)
+pr1.attack4(pr1, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, pr1);
+if (r == 2)
+hands22.attack2(hands22, pr1);
+if (r == 3)
+hands22.attack3(hands22, pr1);
+if (r == 4)
+hands22.attack4(hands22, pr1);
+}
+if (pr1.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (pr1.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, fen12);
+if (r == 2)
+pr1.attack2(pr1, fen12);
+if (r == 3)
+pr1.attack3(pr1, fen12);
+if (r == 4)
+pr1.attack4(pr1, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, pr1);
+if (r == 2)
+fen12.attack2(fen12, pr1);
+if (r == 3)
+fen12.attack3(fen12, pr1);
+if (r == 4)
+fen12.attack4(fen12, pr1);
+}
+if (pr1.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (pr1.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, fen22);
+if (r == 2)
+pr1.attack2(pr1, fen22);
+if (r == 3)
+pr1.attack3(pr1, fen22);
+if (r == 4)
+pr1.attack4(pr1, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, pr1);
+if (r == 2)
+fen22.attack2(fen22, pr1);
+if (r == 3)
+fen22.attack3(fen22, pr1);
+if (r == 4)
+fen22.attack4(fen22, pr1);
+}
+if (pr1.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (pr1.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, ha12);
+if (r == 2)
+pr1.attack2(pr1, ha12);
+if (r == 3)
+pr1.attack3(pr1, ha12);
+if (r == 4)
+pr1.attack4(pr1, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, pr1);
+if (r == 2)
+ha12.attack2(ha12, pr1);
+if (r == 3)
+ha12.attack3(ha12, pr1);
+if (r == 4)
+ha12.attack4(ha12, pr1);
+}
+if (pr1.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (pr1.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr1.attack1(pr1, ha22);
+if (r == 2)
+pr1.attack2(pr1, ha22);
+if (r == 3)
+pr1.attack3(pr1, ha22);
+if (r == 4)
+pr1.attack4(pr1, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, pr1);
+if (r == 2)
+ha22.attack2(ha22, pr1);
+if (r == 3)
+ha22.attack3(ha22, pr1);
+if (r == 4)
+ha22.attack4(ha22, pr1);
+}
+if (pr1.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (pr1.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (pr1.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+if (i == 2)
+{ if (j == 1)
+{while (ill1.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, pr2);
+if (r == 2)
+ill1.attack2(ill1, pr2);
+if (r == 3)
+ill1.attack3(ill1, pr2);
+if (r == 4)
+ill1.attack4(ill1, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, ill1);
+if (r == 2)
+pr2.attack2(pr2, ill1);
+if (r == 3)
+pr2.attack3(pr2, ill1);
+if (r == 4)
+pr2.attack4(pr2, ill1);
+}
+if (ill1.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (ill1.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, ill2);
+if (r == 2)
+ill1.attack2(ill1, ill2);
+if (r == 3)
+ill1.attack3(ill1, ill2);
+if (r == 4)
+ill1.attack4(ill1, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, ill1);
+if (r == 2)
+ill2.attack2(ill2, ill1);
+if (r == 3)
+ill2.attack3(ill2, ill1);
+if (r == 4)
+ill2.attack4(ill2, ill1);
+}
+if (ill1.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (ill1.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, maf2);
+if (r == 2)
+ill1.attack2(ill1, maf2);
+if (r == 3)
+ill1.attack3(ill1, maf2);
+if (r == 4)
+ill1.attack4(ill1, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, ill1);
+if (r == 2)
+maf2.attack2(maf2, ill1);
+if (r == 3)
+maf2.attack3(maf2, ill1);
+if (r == 4)
+maf2.attack4(maf2, ill1);
+}
+if (ill1.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (ill1.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, ya2);
+if (r == 2)
+ill1.attack2(ill1, ya2);
+if (r == 3)
+ill1.attack3(ill1, ya2);
+if (r == 4)
+ill1.attack4(ill1, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, ill1);
+if (r == 2)
+ya2.attack2(ya2, ill1);
+if (r == 3)
+ya2.attack3(ya2, ill1);
+if (r == 4)
+ya2.attack4(ya2, ill1);
+}
+if (ill1.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (ill1.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, fot12);
+if (r == 2)
+ill1.attack2(ill1, fot12);
+if (r == 3)
+ill1.attack3(ill1, fot12);
+if (r == 4)
+ill1.attack4(ill1, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, ill1);
+if (r == 2)
+fot12.attack2(fot12, ill1);
+if (r == 3)
+fot12.attack3(fot12, ill1);
+if (r == 4)
+fot12.attack4(fot12, ill1);
+}
+if (ill1.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (ill1.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, fot22);
+if (r == 2)
+ill1.attack2(ill1, fot22);
+if (r == 3)
+ill1.attack3(ill1, fot22);
+if (r == 4)
+ill1.attack4(ill1, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, ill1);
+if (r == 2)
+fot22.attack2(fot22, ill1);
+if (r == 3)
+fot22.attack3(fot22, ill1);
+if (r == 4)
+fot22.attack4(fot22, ill1);
+}
+if (ill1.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (ill1.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, hands12);
+if (r == 2)
+ill1.attack2(ill1, hands12);
+if (r == 3)
+ill1.attack3(ill1, hands12);
+if (r == 4)
+ill1.attack4(ill1, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, ill1);
+if (r == 2)
+hands12.attack2(hands12, ill1);
+if (r == 3)
+hands12.attack3(hands12, ill1);
+if (r == 4)
+hands12.attack4(hands12, ill1);
+}
+if (ill1.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (ill1.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, hands22);
+if (r == 2)
+ill1.attack2(ill1, hands22);
+if (r == 3)
+ill1.attack3(ill1, hands22);
+if (r == 4)
+ill1.attack4(ill1, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, ill1);
+if (r == 2)
+hands22.attack2(hands22, ill1);
+if (r == 3)
+hands22.attack3(hands22, ill1);
+if (r == 4)
+hands22.attack4(hands22, ill1);
+}
+if (ill1.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (ill1.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, fen12);
+if (r == 2)
+ill1.attack2(ill1, fen12);
+if (r == 3)
+ill1.attack3(ill1, fen12);
+if (r == 4)
+ill1.attack4(ill1, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, ill1);
+if (r == 2)
+fen12.attack2(fen12, ill1);
+if (r == 3)
+fen12.attack3(fen12, ill1);
+if (r == 4)
+fen12.attack4(fen12, ill1);
+}
+if (ill1.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (ill1.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, fen22);
+if (r == 2)
+ill1.attack2(ill1, fen22);
+if (r == 3)
+ill1.attack3(ill1, fen22);
+if (r == 4)
+ill1.attack4(ill1, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, ill1);
+if (r == 2)
+fen22.attack2(fen22, ill1);
+if (r == 3)
+fen22.attack3(fen22, ill1);
+if (r == 4)
+fen22.attack4(fen22, ill1);
+}
+if (ill1.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (ill1.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, ha12);
+if (r == 2)
+ill1.attack2(ill1, ha12);
+if (r == 3)
+ill1.attack3(ill1, ha12);
+if (r == 4)
+ill1.attack4(ill1, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, ill1);
+if (r == 2)
+ha12.attack2(ha12, ill1);
+if (r == 3)
+ha12.attack3(ha12, ill1);
+if (r == 4)
+ha12.attack4(ha12, ill1);
+}
+if (ill1.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (ill1.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill1.attack1(ill1, ha22);
+if (r == 2)
+ill1.attack2(ill1, ha22);
+if (r == 3)
+ill1.attack3(ill1, ha22);
+if (r == 4)
+ill1.attack4(ill1, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, ill1);
+if (r == 2)
+ha22.attack2(ha22, ill1);
+if (r == 3)
+ha22.attack3(ha22, ill1);
+if (r == 4)
+ha22.attack4(ha22, ill1);
+}
+if (ill1.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ill1.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ill1.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+if (i == 3)
+{ if (j == 1)
+{while (maf1.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, pr2);
+if (r == 2)
+maf1.attack2(maf1, pr2);
+if (r == 3)
+maf1.attack3(maf1, pr2);
+if (r == 4)
+maf1.attack4(maf1, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, maf1);
+if (r == 2)
+pr2.attack2(pr2, maf1);
+if (r == 3)
+pr2.attack3(pr2, maf1);
+if (r == 4)
+pr2.attack4(pr2, maf1);
+}
+if (maf1.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (maf1.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, ill2);
+if (r == 2)
+maf1.attack2(maf1, ill2);
+if (r == 3)
+maf1.attack3(maf1, ill2);
+if (r == 4)
+maf1.attack4(maf1, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, maf1);
+if (r == 2)
+ill2.attack2(ill2, maf1);
+if (r == 3)
+ill2.attack3(ill2, maf1);
+if (r == 4)
+ill2.attack4(ill2, maf1);
+}
+if (maf1.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (maf1.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, maf2);
+if (r == 2)
+maf1.attack2(maf1, maf2);
+if (r == 3)
+maf1.attack3(maf1, maf2);
+if (r == 4)
+maf1.attack4(maf1, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, maf1);
+if (r == 2)
+maf2.attack2(maf2, maf1);
+if (r == 3)
+maf2.attack3(maf2, maf1);
+if (r == 4)
+maf2.attack4(maf2, maf1);
+}
+if (maf1.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (maf1.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, ya2);
+if (r == 2)
+maf1.attack2(maf1, ya2);
+if (r == 3)
+maf1.attack3(maf1, ya2);
+if (r == 4)
+maf1.attack4(maf1, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, maf1);
+if (r == 2)
+ya2.attack2(ya2, maf1);
+if (r == 3)
+ya2.attack3(ya2, maf1);
+if (r == 4)
+ya2.attack4(ya2, maf1);
+}
+if (maf1.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (maf1.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, fot12);
+if (r == 2)
+maf1.attack2(maf1, fot12);
+if (r == 3)
+maf1.attack3(maf1, fot12);
+if (r == 4)
+maf1.attack4(maf1, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, maf1);
+if (r == 2)
+fot12.attack2(fot12, maf1);
+if (r == 3)
+fot12.attack3(fot12, maf1);
+if (r == 4)
+fot12.attack4(fot12, maf1);
+}
+if (maf1.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (maf1.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, fot22);
+if (r == 2)
+maf1.attack2(maf1, fot22);
+if (r == 3)
+maf1.attack3(maf1, fot22);
+if (r == 4)
+maf1.attack4(maf1, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, maf1);
+if (r == 2)
+fot22.attack2(fot22, maf1);
+if (r == 3)
+fot22.attack3(fot22, maf1);
+if (r == 4)
+fot22.attack4(fot22, maf1);
+}
+if (maf1.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (maf1.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, hands12);
+if (r == 2)
+maf1.attack2(maf1, hands12);
+if (r == 3)
+maf1.attack3(maf1, hands12);
+if (r == 4)
+maf1.attack4(maf1, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, maf1);
+if (r == 2)
+hands12.attack2(hands12, maf1);
+if (r == 3)
+hands12.attack3(hands12, maf1);
+if (r == 4)
+hands12.attack4(hands12, maf1);
+}
+if (maf1.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (maf1.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, hands22);
+if (r == 2)
+maf1.attack2(maf1, hands22);
+if (r == 3)
+maf1.attack3(maf1, hands22);
+if (r == 4)
+maf1.attack4(maf1, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, maf1);
+if (r == 2)
+hands22.attack2(hands22, maf1);
+if (r == 3)
+hands22.attack3(hands22, maf1);
+if (r == 4)
+hands22.attack4(hands22, maf1);
+}
+if (maf1.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (maf1.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, fen12);
+if (r == 2)
+maf1.attack2(maf1, fen12);
+if (r == 3)
+maf1.attack3(maf1, fen12);
+if (r == 4)
+maf1.attack4(maf1, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, maf1);
+if (r == 2)
+fen12.attack2(fen12, maf1);
+if (r == 3)
+fen12.attack3(fen12, maf1);
+if (r == 4)
+fen12.attack4(fen12, maf1);
+}
+if (maf1.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (maf1.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, fen22);
+if (r == 2)
+maf1.attack2(maf1, fen22);
+if (r == 3)
+maf1.attack3(maf1, fen22);
+if (r == 4)
+maf1.attack4(maf1, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, maf1);
+if (r == 2)
+fen22.attack2(fen22, maf1);
+if (r == 3)
+fen22.attack3(fen22, maf1);
+if (r == 4)
+fen22.attack4(fen22, maf1);
+}
+if (maf1.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (maf1.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, ha12);
+if (r == 2)
+maf1.attack2(maf1, ha12);
+if (r == 3)
+maf1.attack3(maf1, ha12);
+if (r == 4)
+maf1.attack4(maf1, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, maf1);
+if (r == 2)
+ha12.attack2(ha12, maf1);
+if (r == 3)
+ha12.attack3(ha12, maf1);
+if (r == 4)
+ha12.attack4(ha12, maf1);
+}
+if (maf1.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (maf1.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf1.attack1(maf1, ha22);
+if (r == 2)
+maf1.attack2(maf1, ha22);
+if (r == 3)
+maf1.attack3(maf1, ha22);
+if (r == 4)
+maf1.attack4(maf1, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, maf1);
+if (r == 2)
+ha22.attack2(ha22, maf1);
+if (r == 3)
+ha22.attack3(ha22, maf1);
+if (r == 4)
+ha22.attack4(ha22, maf1);
+}
+if (maf1.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (maf1.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (maf1.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+if (i == 4)
+{ if (j == 1)
+{while (ya1.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, pr2);
+if (r == 2)
+ya1.attack2(ya1, pr2);
+if (r == 3)
+ya1.attack3(ya1, pr2);
+if (r == 4)
+ya1.attack4(ya1, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, ya1);
+if (r == 2)
+pr2.attack2(pr2, ya1);
+if (r == 3)
+pr2.attack3(pr2, ya1);
+if (r == 4)
+pr2.attack4(pr2, ya1);
+}
+if (ya1.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (ya1.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, ill2);
+if (r == 2)
+ya1.attack2(ya1, ill2);
+if (r == 3)
+ya1.attack3(ya1, ill2);
+if (r == 4)
+ya1.attack4(ya1, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, ya1);
+if (r == 2)
+ill2.attack2(ill2, ya1);
+if (r == 3)
+ill2.attack3(ill2, ya1);
+if (r == 4)
+ill2.attack4(ill2, ya1);
+}
+if (ya1.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (ya1.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, maf2);
+if (r == 2)
+ya1.attack2(ya1, maf2);
+if (r == 3)
+ya1.attack3(ya1, maf2);
+if (r == 4)
+ya1.attack4(ya1, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, ya1);
+if (r == 2)
+maf2.attack2(maf2, ya1);
+if (r == 3)
+maf2.attack3(maf2, ya1);
+if (r == 4)
+maf2.attack4(maf2, ya1);
+}
+if (ya1.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (ya1.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, ya2);
+if (r == 2)
+ya1.attack2(ya1, ya2);
+if (r == 3)
+ya1.attack3(ya1, ya2);
+if (r == 4)
+ya1.attack4(ya1, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, ya1);
+if (r == 2)
+ya2.attack2(ya2, ya1);
+if (r == 3)
+ya2.attack3(ya2, ya1);
+if (r == 4)
+ya2.attack4(ya2, ya1);
+}
+if (ya1.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (ya1.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, fot12);
+if (r == 2)
+ya1.attack2(ya1, fot12);
+if (r == 3)
+ya1.attack3(ya1, fot12);
+if (r == 4)
+ya1.attack4(ya1, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, ya1);
+if (r == 2)
+fot12.attack2(fot12, ya1);
+if (r == 3)
+fot12.attack3(fot12, ya1);
+if (r == 4)
+fot12.attack4(fot12, ya1);
+}
+if (ya1.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (ya1.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, fot22);
+if (r == 2)
+ya1.attack2(ya1, fot22);
+if (r == 3)
+ya1.attack3(ya1, fot22);
+if (r == 4)
+ya1.attack4(ya1, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, ya1);
+if (r == 2)
+fot22.attack2(fot22, ya1);
+if (r == 3)
+fot22.attack3(fot22, ya1);
+if (r == 4)
+fot22.attack4(fot22, ya1);
+}
+if (ya1.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (ya1.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, hands12);
+if (r == 2)
+ya1.attack2(ya1, hands12);
+if (r == 3)
+ya1.attack3(ya1, hands12);
+if (r == 4)
+ya1.attack4(ya1, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, ya1);
+if (r == 2)
+hands12.attack2(hands12, ya1);
+if (r == 3)
+hands12.attack3(hands12, ya1);
+if (r == 4)
+hands12.attack4(hands12, ya1);
+}
+if (ya1.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (ya1.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, hands22);
+if (r == 2)
+ya1.attack2(ya1, hands22);
+if (r == 3)
+ya1.attack3(ya1, hands22);
+if (r == 4)
+ya1.attack4(ya1, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, ya1);
+if (r == 2)
+hands22.attack2(hands22, ya1);
+if (r == 3)
+hands22.attack3(hands22, ya1);
+if (r == 4)
+hands22.attack4(hands22, ya1);
+}
+if (ya1.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (ya1.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, fen12);
+if (r == 2)
+ya1.attack2(ya1, fen12);
+if (r == 3)
+ya1.attack3(ya1, fen12);
+if (r == 4)
+ya1.attack4(ya1, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, ya1);
+if (r == 2)
+fen12.attack2(fen12, ya1);
+if (r == 3)
+fen12.attack3(fen12, ya1);
+if (r == 4)
+fen12.attack4(fen12, ya1);
+}
+if (ya1.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (ya1.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, fen22);
+if (r == 2)
+ya1.attack2(ya1, fen22);
+if (r == 3)
+ya1.attack3(ya1, fen22);
+if (r == 4)
+ya1.attack4(ya1, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, ya1);
+if (r == 2)
+fen22.attack2(fen22, ya1);
+if (r == 3)
+fen22.attack3(fen22, ya1);
+if (r == 4)
+fen22.attack4(fen22, ya1);
+}
+if (ya1.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (ya1.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, ha12);
+if (r == 2)
+ya1.attack2(ya1, ha12);
+if (r == 3)
+ya1.attack3(ya1, ha12);
+if (r == 4)
+ya1.attack4(ya1, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, ya1);
+if (r == 2)
+ha12.attack2(ha12, ya1);
+if (r == 3)
+ha12.attack3(ha12, ya1);
+if (r == 4)
+ha12.attack4(ha12, ya1);
+}
+if (ya1.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (ya1.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya1.attack1(ya1, ha22);
+if (r == 2)
+ya1.attack2(ya1, ha22);
+if (r == 3)
+ya1.attack3(ya1, ha22);
+if (r == 4)
+ya1.attack4(ya1, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, ya1);
+if (r == 2)
+ha22.attack2(ha22, ya1);
+if (r == 3)
+ha22.attack3(ha22, ya1);
+if (r == 4)
+ha22.attack4(ha22, ya1);
+}
+if (ya1.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ya1.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ya1.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+
+if (i == 5)
+{ if (j == 1)
+{while (fot11.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, pr2);
+if (r == 2)
+fot11.attack2(fot11, pr2);
+if (r == 3)
+fot11.attack3(fot11, pr2);
+if (r == 4)
+fot11.attack4(fot11, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, fot11);
+if (r == 2)
+pr2.attack2(pr2, fot11);
+if (r == 3)
+pr2.attack3(pr2, fot11);
+if (r == 4)
+pr2.attack4(pr2, fot11);
+}
+if (fot11.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (fot11.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, ill2);
+if (r == 2)
+fot11.attack2(fot11, ill2);
+if (r == 3)
+fot11.attack3(fot11, ill2);
+if (r == 4)
+fot11.attack4(fot11, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, fot11);
+if (r == 2)
+ill2.attack2(ill2, fot11);
+if (r == 3)
+ill2.attack3(ill2, fot11);
+if (r == 4)
+ill2.attack4(ill2, fot11);
+}
+if (fot11.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (fot11.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, maf2);
+if (r == 2)
+fot11.attack2(fot11, maf2);
+if (r == 3)
+fot11.attack3(fot11, maf2);
+if (r == 4)
+fot11.attack4(fot11, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, fot11);
+if (r == 2)
+maf2.attack2(maf2, fot11);
+if (r == 3)
+maf2.attack3(maf2, fot11);
+if (r == 4)
+maf2.attack4(maf2, fot11);
+}
+if (fot11.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (fot11.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, ya2);
+if (r == 2)
+fot11.attack2(fot11, ya2);
+if (r == 3)
+fot11.attack3(fot11, ya2);
+if (r == 4)
+fot11.attack4(fot11, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, fot11);
+if (r == 2)
+ya2.attack2(ya2, fot11);
+if (r == 3)
+ya2.attack3(ya2, fot11);
+if (r == 4)
+ya2.attack4(ya2, fot11);
+}
+if (fot11.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (fot11.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, fot12);
+if (r == 2)
+fot11.attack2(fot11, fot12);
+if (r == 3)
+fot11.attack3(fot11, fot12);
+if (r == 4)
+fot11.attack4(fot11, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, fot11);
+if (r == 2)
+fot12.attack2(fot12, fot11);
+if (r == 3)
+fot12.attack3(fot12, fot11);
+if (r == 4)
+fot12.attack4(fot12, fot11);
+}
+if (fot11.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (fot11.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, fot22);
+if (r == 2)
+fot11.attack2(fot11, fot22);
+if (r == 3)
+fot11.attack3(fot11, fot22);
+if (r == 4)
+fot11.attack4(fot11, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, fot11);
+if (r == 2)
+fot22.attack2(fot22, fot11);
+if (r == 3)
+fot22.attack3(fot22, fot11);
+if (r == 4)
+fot22.attack4(fot22, fot11);
+}
+if (fot11.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (fot11.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, hands12);
+if (r == 2)
+fot11.attack2(fot11, hands12);
+if (r == 3)
+fot11.attack3(fot11, hands12);
+if (r == 4)
+fot11.attack4(fot11, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, fot11);
+if (r == 2)
+hands12.attack2(hands12, fot11);
+if (r == 3)
+hands12.attack3(hands12, fot11);
+if (r == 4)
+hands12.attack4(hands12, fot11);
+}
+if (fot11.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (fot11.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, hands22);
+if (r == 2)
+fot11.attack2(fot11, hands22);
+if (r == 3)
+fot11.attack3(fot11, hands22);
+if (r == 4)
+fot11.attack4(fot11, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, fot11);
+if (r == 2)
+hands22.attack2(hands22, fot11);
+if (r == 3)
+hands22.attack3(hands22, fot11);
+if (r == 4)
+hands22.attack4(hands22, fot11);
+}
+if (fot11.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (fot11.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, fen12);
+if (r == 2)
+fot11.attack2(fot11, fen12);
+if (r == 3)
+fot11.attack3(fot11, fen12);
+if (r == 4)
+fot11.attack4(fot11, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, fot11);
+if (r == 2)
+fen12.attack2(fen12, fot11);
+if (r == 3)
+fen12.attack3(fen12, fot11);
+if (r == 4)
+fen12.attack4(fen12, fot11);
+}
+if (fot11.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (fot11.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, fen22);
+if (r == 2)
+fot11.attack2(fot11, fen22);
+if (r == 3)
+fot11.attack3(fot11, fen22);
+if (r == 4)
+fot11.attack4(fot11, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, fot11);
+if (r == 2)
+fen22.attack2(fen22, fot11);
+if (r == 3)
+fen22.attack3(fen22, fot11);
+if (r == 4)
+fen22.attack4(fen22, fot11);
+}
+if (fot11.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (fot11.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, ha12);
+if (r == 2)
+fot11.attack2(fot11, ha12);
+if (r == 3)
+fot11.attack3(fot11, ha12);
+if (r == 4)
+fot11.attack4(fot11, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, fot11);
+if (r == 2)
+ha12.attack2(ha12, fot11);
+if (r == 3)
+ha12.attack3(ha12, fot11);
+if (r == 4)
+ha12.attack4(ha12, fot11);
+}
+if (fot11.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (fot11.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot11.attack1(fot11, ha22);
+if (r == 2)
+fot11.attack2(fot11, ha22);
+if (r == 3)
+fot11.attack3(fot11, ha22);
+if (r == 4)
+fot11.attack4(fot11, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, fot11);
+if (r == 2)
+ha22.attack2(ha22, fot11);
+if (r == 3)
+ha22.attack3(ha22, fot11);
+if (r == 4)
+ha22.attack4(ha22, fot11);
+}
+if (fot11.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot11.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot11.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+if (i == 6)
+{ if (j == 1)
+{while (fot21.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, pr2);
+if (r == 2)
+fot21.attack2(fot21, pr2);
+if (r == 3)
+fot21.attack3(fot21, pr2);
+if (r == 4)
+fot21.attack4(fot21, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, fot21);
+if (r == 2)
+pr2.attack2(pr2, fot21);
+if (r == 3)
+pr2.attack3(pr2, fot21);
+if (r == 4)
+pr2.attack4(pr2, fot21);
+}
+if (fot21.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (fot21.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, ill2);
+if (r == 2)
+fot21.attack2(fot21, ill2);
+if (r == 3)
+fot21.attack3(fot21, ill2);
+if (r == 4)
+fot21.attack4(fot21, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, fot21);
+if (r == 2)
+ill2.attack2(ill2, fot21);
+if (r == 3)
+ill2.attack3(ill2, fot21);
+if (r == 4)
+ill2.attack4(ill2, fot21);
+}
+if (fot21.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (fot21.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, maf2);
+if (r == 2)
+fot21.attack2(fot21, maf2);
+if (r == 3)
+fot21.attack3(fot21, maf2);
+if (r == 4)
+fot21.attack4(fot21, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, fot21);
+if (r == 2)
+maf2.attack2(maf2, fot21);
+if (r == 3)
+maf2.attack3(maf2, fot21);
+if (r == 4)
+maf2.attack4(maf2, fot21);
+}
+if (fot21.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (fot21.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, ya2);
+if (r == 2)
+fot21.attack2(fot21, ya2);
+if (r == 3)
+fot21.attack3(fot21, ya2);
+if (r == 4)
+fot21.attack4(fot21, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, fot21);
+if (r == 2)
+ya2.attack2(ya2, fot21);
+if (r == 3)
+ya2.attack3(ya2, fot21);
+if (r == 4)
+ya2.attack4(ya2, fot21);
+}
+if (fot21.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (fot21.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, fot12);
+if (r == 2)
+fot21.attack2(fot21, fot12);
+if (r == 3)
+fot21.attack3(fot21, fot12);
+if (r == 4)
+fot21.attack4(fot21, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, fot21);
+if (r == 2)
+fot12.attack2(fot12, fot21);
+if (r == 3)
+fot12.attack3(fot12, fot21);
+if (r == 4)
+fot12.attack4(fot12, fot21);
+}
+if (fot21.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (fot21.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, fot22);
+if (r == 2)
+fot21.attack2(fot21, fot22);
+if (r == 3)
+fot21.attack3(fot21, fot22);
+if (r == 4)
+fot21.attack4(fot21, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, fot21);
+if (r == 2)
+fot22.attack2(fot22, fot21);
+if (r == 3)
+fot22.attack3(fot22, fot21);
+if (r == 4)
+fot22.attack4(fot22, fot21);
+}
+if (fot21.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (fot21.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, hands12);
+if (r == 2)
+fot21.attack2(fot21, hands12);
+if (r == 3)
+fot21.attack3(fot21, hands12);
+if (r == 4)
+fot21.attack4(fot21, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, fot21);
+if (r == 2)
+hands12.attack2(hands12, fot21);
+if (r == 3)
+hands12.attack3(hands12, fot21);
+if (r == 4)
+hands12.attack4(hands12, fot21);
+}
+if (fot21.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (fot21.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, hands22);
+if (r == 2)
+fot21.attack2(fot21, hands22);
+if (r == 3)
+fot21.attack3(fot21, hands22);
+if (r == 4)
+fot21.attack4(fot21, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, fot21);
+if (r == 2)
+hands22.attack2(hands22, fot21);
+if (r == 3)
+hands22.attack3(hands22, fot21);
+if (r == 4)
+hands22.attack4(hands22, fot21);
+}
+if (fot21.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (fot21.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, fen12);
+if (r == 2)
+fot21.attack2(fot21, fen12);
+if (r == 3)
+fot21.attack3(fot21, fen12);
+if (r == 4)
+fot21.attack4(fot21, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, fot21);
+if (r == 2)
+fen12.attack2(fen12, fot21);
+if (r == 3)
+fen12.attack3(fen12, fot21);
+if (r == 4)
+fen12.attack4(fen12, fot21);
+}
+if (fot21.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (fot21.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, fen22);
+if (r == 2)
+fot21.attack2(fot21, fen22);
+if (r == 3)
+fot21.attack3(fot21, fen22);
+if (r == 4)
+fot21.attack4(fot21, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, fot21);
+if (r == 2)
+fen22.attack2(fen22, fot21);
+if (r == 3)
+fen22.attack3(fen22, fot21);
+if (r == 4)
+fen22.attack4(fen22, fot21);
+}
+if (fot21.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (fot21.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, ha12);
+if (r == 2)
+fot21.attack2(fot21, ha12);
+if (r == 3)
+fot21.attack3(fot21, ha12);
+if (r == 4)
+fot21.attack4(fot21, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, fot21);
+if (r == 2)
+ha12.attack2(ha12, fot21);
+if (r == 3)
+ha12.attack3(ha12, fot21);
+if (r == 4)
+ha12.attack4(ha12, fot21);
+}
+if (fot21.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (fot21.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot21.attack1(fot21, ha22);
+if (r == 2)
+fot21.attack2(fot21, ha22);
+if (r == 3)
+fot21.attack3(fot21, ha22);
+if (r == 4)
+fot21.attack4(fot21, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, fot21);
+if (r == 2)
+ha22.attack2(ha22, fot21);
+if (r == 3)
+ha22.attack3(ha22, fot21);
+if (r == 4)
+ha22.attack4(ha22, fot21);
+}
+if (fot21.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fot21.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fot21.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+if (i == 7)
+{ if (j == 1)
+{while (hands11.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, pr2);
+if (r == 2)
+hands11.attack2(hands11, pr2);
+if (r == 3)
+hands11.attack3(hands11, pr2);
+if (r == 4)
+hands11.attack4(hands11, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, hands11);
+if (r == 2)
+pr2.attack2(pr2, hands11);
+if (r == 3)
+pr2.attack3(pr2, hands11);
+if (r == 4)
+pr2.attack4(pr2, hands11);
+}
+if (hands11.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (hands11.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, ill2);
+if (r == 2)
+hands11.attack2(hands11, ill2);
+if (r == 3)
+hands11.attack3(hands11, ill2);
+if (r == 4)
+hands11.attack4(hands11, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, hands11);
+if (r == 2)
+ill2.attack2(ill2, hands11);
+if (r == 3)
+ill2.attack3(ill2, hands11);
+if (r == 4)
+ill2.attack4(ill2, hands11);
+}
+if (hands11.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (hands11.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, maf2);
+if (r == 2)
+hands11.attack2(hands11, maf2);
+if (r == 3)
+hands11.attack3(hands11, maf2);
+if (r == 4)
+hands11.attack4(hands11, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, hands11);
+if (r == 2)
+maf2.attack2(maf2, hands11);
+if (r == 3)
+maf2.attack3(maf2, hands11);
+if (r == 4)
+maf2.attack4(maf2, hands11);
+}
+if (hands11.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (hands11.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, ya2);
+if (r == 2)
+hands11.attack2(hands11, ya2);
+if (r == 3)
+hands11.attack3(hands11, ya2);
+if (r == 4)
+hands11.attack4(hands11, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, hands11);
+if (r == 2)
+ya2.attack2(ya2, hands11);
+if (r == 3)
+ya2.attack3(ya2, hands11);
+if (r == 4)
+ya2.attack4(ya2, hands11);
+}
+if (hands11.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (hands11.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, fot12);
+if (r == 2)
+hands11.attack2(hands11, fot12);
+if (r == 3)
+hands11.attack3(hands11, fot12);
+if (r == 4)
+hands11.attack4(hands11, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, hands11);
+if (r == 2)
+fot12.attack2(fot12, hands11);
+if (r == 3)
+fot12.attack3(fot12, hands11);
+if (r == 4)
+fot12.attack4(fot12, hands11);
+}
+if (hands11.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (hands11.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, fot22);
+if (r == 2)
+hands11.attack2(hands11, fot22);
+if (r == 3)
+hands11.attack3(hands11, fot22);
+if (r == 4)
+hands11.attack4(hands11, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, hands11);
+if (r == 2)
+fot22.attack2(fot22, hands11);
+if (r == 3)
+fot22.attack3(fot22, hands11);
+if (r == 4)
+fot22.attack4(fot22, hands11);
+}
+if (hands11.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (hands11.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, hands12);
+if (r == 2)
+hands11.attack2(hands11, hands12);
+if (r == 3)
+hands11.attack3(hands11, hands12);
+if (r == 4)
+hands11.attack4(hands11, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, hands11);
+if (r == 2)
+hands12.attack2(hands12, hands11);
+if (r == 3)
+hands12.attack3(hands12, hands11);
+if (r == 4)
+hands12.attack4(hands12, hands11);
+}
+if (hands11.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (hands11.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, hands22);
+if (r == 2)
+hands11.attack2(hands11, hands22);
+if (r == 3)
+hands11.attack3(hands11, hands22);
+if (r == 4)
+hands11.attack4(hands11, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, hands11);
+if (r == 2)
+hands22.attack2(hands22, hands11);
+if (r == 3)
+hands22.attack3(hands22, hands11);
+if (r == 4)
+hands22.attack4(hands22, hands11);
+}
+if (hands11.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (hands11.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, fen12);
+if (r == 2)
+hands11.attack2(hands11, fen12);
+if (r == 3)
+hands11.attack3(hands11, fen12);
+if (r == 4)
+hands11.attack4(hands11, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, hands11);
+if (r == 2)
+fen12.attack2(fen12, hands11);
+if (r == 3)
+fen12.attack3(fen12, hands11);
+if (r == 4)
+fen12.attack4(fen12, hands11);
+}
+if (hands11.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (hands11.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, fen22);
+if (r == 2)
+hands11.attack2(hands11, fen22);
+if (r == 3)
+hands11.attack3(hands11, fen22);
+if (r == 4)
+hands11.attack4(hands11, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, hands11);
+if (r == 2)
+fen22.attack2(fen22, hands11);
+if (r == 3)
+fen22.attack3(fen22, hands11);
+if (r == 4)
+fen22.attack4(fen22, hands11);
+}
+if (hands11.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (hands11.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, ha12);
+if (r == 2)
+hands11.attack2(hands11, ha12);
+if (r == 3)
+hands11.attack3(hands11, ha12);
+if (r == 4)
+hands11.attack4(hands11, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, hands11);
+if (r == 2)
+ha12.attack2(ha12, hands11);
+if (r == 3)
+ha12.attack3(ha12, hands11);
+if (r == 4)
+ha12.attack4(ha12, hands11);
+}
+if (hands11.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (hands11.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands11.attack1(hands11, ha22);
+if (r == 2)
+hands11.attack2(hands11, ha22);
+if (r == 3)
+hands11.attack3(hands11, ha22);
+if (r == 4)
+hands11.attack4(hands11, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, hands11);
+if (r == 2)
+ha22.attack2(ha22, hands11);
+if (r == 3)
+ha22.attack3(ha22, hands11);
+if (r == 4)
+ha22.attack4(ha22, hands11);
+}
+if (hands11.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands11.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands11.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+
+if (i == 8)
+{ if (j == 1)
+{while (hands21.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, pr2);
+if (r == 2)
+hands21.attack2(hands21, pr2);
+if (r == 3)
+hands21.attack3(hands21, pr2);
+if (r == 4)
+hands21.attack4(hands21, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, hands21);
+if (r == 2)
+pr2.attack2(pr2, hands21);
+if (r == 3)
+pr2.attack3(pr2, hands21);
+if (r == 4)
+pr2.attack4(pr2, hands21);
+}
+if (hands21.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (hands21.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, ill2);
+if (r == 2)
+hands21.attack2(hands21, ill2);
+if (r == 3)
+hands21.attack3(hands21, ill2);
+if (r == 4)
+hands21.attack4(hands21, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, hands21);
+if (r == 2)
+ill2.attack2(ill2, hands21);
+if (r == 3)
+ill2.attack3(ill2, hands21);
+if (r == 4)
+ill2.attack4(ill2, hands21);
+}
+if (hands21.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (hands21.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, maf2);
+if (r == 2)
+hands21.attack2(hands21, maf2);
+if (r == 3)
+hands21.attack3(hands21, maf2);
+if (r == 4)
+hands21.attack4(hands21, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, hands21);
+if (r == 2)
+maf2.attack2(maf2, hands21);
+if (r == 3)
+maf2.attack3(maf2, hands21);
+if (r == 4)
+maf2.attack4(maf2, hands21);
+}
+if (hands21.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (hands21.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, ya2);
+if (r == 2)
+hands21.attack2(hands21, ya2);
+if (r == 3)
+hands21.attack3(hands21, ya2);
+if (r == 4)
+hands21.attack4(hands21, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, hands21);
+if (r == 2)
+ya2.attack2(ya2, hands21);
+if (r == 3)
+ya2.attack3(ya2, hands21);
+if (r == 4)
+ya2.attack4(ya2, hands21);
+}
+if (hands21.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (hands21.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, fot12);
+if (r == 2)
+hands21.attack2(hands21, fot12);
+if (r == 3)
+hands21.attack3(hands21, fot12);
+if (r == 4)
+hands21.attack4(hands21, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, hands21);
+if (r == 2)
+fot12.attack2(fot12, hands21);
+if (r == 3)
+fot12.attack3(fot12, hands21);
+if (r == 4)
+fot12.attack4(fot12, hands21);
+}
+if (hands21.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (hands21.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, fot22);
+if (r == 2)
+hands21.attack2(hands21, fot22);
+if (r == 3)
+hands21.attack3(hands21, fot22);
+if (r == 4)
+hands21.attack4(hands21, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, hands21);
+if (r == 2)
+fot22.attack2(fot22, hands21);
+if (r == 3)
+fot22.attack3(fot22, hands21);
+if (r == 4)
+fot22.attack4(fot22, hands21);
+}
+if (hands21.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (hands21.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, hands12);
+if (r == 2)
+hands21.attack2(hands21, hands12);
+if (r == 3)
+hands21.attack3(hands21, hands12);
+if (r == 4)
+hands21.attack4(hands21, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, hands21);
+if (r == 2)
+hands12.attack2(hands12, hands21);
+if (r == 3)
+hands12.attack3(hands12, hands21);
+if (r == 4)
+hands12.attack4(hands12, hands21);
+}
+if (hands21.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (hands21.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, hands22);
+if (r == 2)
+hands21.attack2(hands21, hands22);
+if (r == 3)
+hands21.attack3(hands21, hands22);
+if (r == 4)
+hands21.attack4(hands21, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, hands21);
+if (r == 2)
+hands22.attack2(hands22, hands21);
+if (r == 3)
+hands22.attack3(hands22, hands21);
+if (r == 4)
+hands22.attack4(hands22, hands21);
+}
+if (hands21.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (hands21.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, fen12);
+if (r == 2)
+hands21.attack2(hands21, fen12);
+if (r == 3)
+hands21.attack3(hands21, fen12);
+if (r == 4)
+hands21.attack4(hands21, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, hands21);
+if (r == 2)
+fen12.attack2(fen12, hands21);
+if (r == 3)
+fen12.attack3(fen12, hands21);
+if (r == 4)
+fen12.attack4(fen12, hands21);
+}
+if (hands21.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (hands21.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, fen22);
+if (r == 2)
+hands21.attack2(hands21, fen22);
+if (r == 3)
+hands21.attack3(hands21, fen22);
+if (r == 4)
+hands21.attack4(hands21, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, hands21);
+if (r == 2)
+fen22.attack2(fen22, hands21);
+if (r == 3)
+fen22.attack3(fen22, hands21);
+if (r == 4)
+fen22.attack4(fen22, hands21);
+}
+if (hands21.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (hands21.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, ha12);
+if (r == 2)
+hands21.attack2(hands21, ha12);
+if (r == 3)
+hands21.attack3(hands21, ha12);
+if (r == 4)
+hands21.attack4(hands21, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, hands21);
+if (r == 2)
+ha12.attack2(ha12, hands21);
+if (r == 3)
+ha12.attack3(ha12, hands21);
+if (r == 4)
+ha12.attack4(ha12, hands21);
+}
+if (hands21.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (hands21.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands21.attack1(hands21, ha22);
+if (r == 2)
+hands21.attack2(hands21, ha22);
+if (r == 3)
+hands21.attack3(hands21, ha22);
+if (r == 4)
+hands21.attack4(hands21, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, hands21);
+if (r == 2)
+ha22.attack2(ha22, hands21);
+if (r == 3)
+ha22.attack3(ha22, hands21);
+if (r == 4)
+ha22.attack4(ha22, hands21);
+}
+if (hands21.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (hands21.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (hands21.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+if (i == 9)
+{ if (j == 1)
+{while (fen11.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, pr2);
+if (r == 2)
+fen11.attack2(fen11, pr2);
+if (r == 3)
+fen11.attack3(fen11, pr2);
+if (r == 4)
+fen11.attack4(fen11, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, fen11);
+if (r == 2)
+pr2.attack2(pr2, fen11);
+if (r == 3)
+pr2.attack3(pr2, fen11);
+if (r == 4)
+pr2.attack4(pr2, fen11);
+}
+if (fen11.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (fen11.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, ill2);
+if (r == 2)
+fen11.attack2(fen11, ill2);
+if (r == 3)
+fen11.attack3(fen11, ill2);
+if (r == 4)
+fen11.attack4(fen11, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, fen11);
+if (r == 2)
+ill2.attack2(ill2, fen11);
+if (r == 3)
+ill2.attack3(ill2, fen11);
+if (r == 4)
+ill2.attack4(ill2, fen11);
+}
+if (fen11.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (fen11.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, maf2);
+if (r == 2)
+fen11.attack2(fen11, maf2);
+if (r == 3)
+fen11.attack3(fen11, maf2);
+if (r == 4)
+fen11.attack4(fen11, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, fen11);
+if (r == 2)
+maf2.attack2(maf2, fen11);
+if (r == 3)
+maf2.attack3(maf2, fen11);
+if (r == 4)
+maf2.attack4(maf2, fen11);
+}
+if (fen11.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (fen11.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, ya2);
+if (r == 2)
+fen11.attack2(fen11, ya2);
+if (r == 3)
+fen11.attack3(fen11, ya2);
+if (r == 4)
+fen11.attack4(fen11, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, fen11);
+if (r == 2)
+ya2.attack2(ya2, fen11);
+if (r == 3)
+ya2.attack3(ya2, fen11);
+if (r == 4)
+ya2.attack4(ya2, fen11);
+}
+if (fen11.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (fen11.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, fot12);
+if (r == 2)
+fen11.attack2(fen11, fot12);
+if (r == 3)
+fen11.attack3(fen11, fot12);
+if (r == 4)
+fen11.attack4(fen11, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, fen11);
+if (r == 2)
+fot12.attack2(fot12, fen11);
+if (r == 3)
+fot12.attack3(fot12, fen11);
+if (r == 4)
+fot12.attack4(fot12, fen11);
+}
+if (fen11.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (fen11.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, fot22);
+if (r == 2)
+fen11.attack2(fen11, fot22);
+if (r == 3)
+fen11.attack3(fen11, fot22);
+if (r == 4)
+fen11.attack4(fen11, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, fen11);
+if (r == 2)
+fot22.attack2(fot22, fen11);
+if (r == 3)
+fot22.attack3(fot22, fen11);
+if (r == 4)
+fot22.attack4(fot22, fen11);
+}
+if (fen11.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (fen11.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, hands12);
+if (r == 2)
+fen11.attack2(fen11, hands12);
+if (r == 3)
+fen11.attack3(fen11, hands12);
+if (r == 4)
+fen11.attack4(fen11, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, fen11);
+if (r == 2)
+hands12.attack2(hands12, fen11);
+if (r == 3)
+hands12.attack3(hands12, fen11);
+if (r == 4)
+hands12.attack4(hands12, fen11);
+}
+if (fen11.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (fen11.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, hands22);
+if (r == 2)
+fen11.attack2(fen11, hands22);
+if (r == 3)
+fen11.attack3(fen11, hands22);
+if (r == 4)
+fen11.attack4(fen11, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, fen11);
+if (r == 2)
+hands22.attack2(hands22, fen11);
+if (r == 3)
+hands22.attack3(hands22, fen11);
+if (r == 4)
+hands22.attack4(hands22, fen11);
+}
+if (fen11.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (fen11.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, fen12);
+if (r == 2)
+fen11.attack2(fen11, fen12);
+if (r == 3)
+fen11.attack3(fen11, fen12);
+if (r == 4)
+fen11.attack4(fen11, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, fen11);
+if (r == 2)
+fen12.attack2(fen12, fen11);
+if (r == 3)
+fen12.attack3(fen12, fen11);
+if (r == 4)
+fen12.attack4(fen12, fen11);
+}
+if (fen11.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (fen11.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, fen22);
+if (r == 2)
+fen11.attack2(fen11, fen22);
+if (r == 3)
+fen11.attack3(fen11, fen22);
+if (r == 4)
+fen11.attack4(fen11, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, fen11);
+if (r == 2)
+fen22.attack2(fen22, fen11);
+if (r == 3)
+fen22.attack3(fen22, fen11);
+if (r == 4)
+fen22.attack4(fen22, fen11);
+}
+if (fen11.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (fen11.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, ha12);
+if (r == 2)
+fen11.attack2(fen11, ha12);
+if (r == 3)
+fen11.attack3(fen11, ha12);
+if (r == 4)
+fen11.attack4(fen11, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, fen11);
+if (r == 2)
+ha12.attack2(ha12, fen11);
+if (r == 3)
+ha12.attack3(ha12, fen11);
+if (r == 4)
+ha12.attack4(ha12, fen11);
+}
+if (fen11.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (fen11.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen11.attack1(fen11, ha22);
+if (r == 2)
+fen11.attack2(fen11, ha22);
+if (r == 3)
+fen11.attack3(fen11, ha22);
+if (r == 4)
+fen11.attack4(fen11, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, fen11);
+if (r == 2)
+ha22.attack2(ha22, fen11);
+if (r == 3)
+ha22.attack3(ha22, fen11);
+if (r == 4)
+ha22.attack4(ha22, fen11);
+}
+if (fen11.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen11.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen11.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+if (i == 10)
+{ if (j == 1)
+{while (fen21.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, pr2);
+if (r == 2)
+fen21.attack2(fen21, pr2);
+if (r == 3)
+fen21.attack3(fen21, pr2);
+if (r == 4)
+fen21.attack4(fen21, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, fen21);
+if (r == 2)
+pr2.attack2(pr2, fen21);
+if (r == 3)
+pr2.attack3(pr2, fen21);
+if (r == 4)
+pr2.attack4(pr2, fen21);
+}
+if (fen21.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (fen21.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, ill2);
+if (r == 2)
+fen21.attack2(fen21, ill2);
+if (r == 3)
+fen21.attack3(fen21, ill2);
+if (r == 4)
+fen21.attack4(fen21, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, fen21);
+if (r == 2)
+ill2.attack2(ill2, fen21);
+if (r == 3)
+ill2.attack3(ill2, fen21);
+if (r == 4)
+ill2.attack4(ill2, fen21);
+}
+if (fen21.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (fen21.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, maf2);
+if (r == 2)
+fen21.attack2(fen21, maf2);
+if (r == 3)
+fen21.attack3(fen21, maf2);
+if (r == 4)
+fen21.attack4(fen21, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, fen21);
+if (r == 2)
+maf2.attack2(maf2, fen21);
+if (r == 3)
+maf2.attack3(maf2, fen21);
+if (r == 4)
+maf2.attack4(maf2, fen21);
+}
+if (fen21.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (fen21.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, ya2);
+if (r == 2)
+fen21.attack2(fen21, ya2);
+if (r == 3)
+fen21.attack3(fen21, ya2);
+if (r == 4)
+fen21.attack4(fen21, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, fen21);
+if (r == 2)
+ya2.attack2(ya2, fen21);
+if (r == 3)
+ya2.attack3(ya2, fen21);
+if (r == 4)
+ya2.attack4(ya2, fen21);
+}
+if (fen21.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (fen21.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, fot12);
+if (r == 2)
+fen21.attack2(fen21, fot12);
+if (r == 3)
+fen21.attack3(fen21, fot12);
+if (r == 4)
+fen21.attack4(fen21, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, fen21);
+if (r == 2)
+fot12.attack2(fot12, fen21);
+if (r == 3)
+fot12.attack3(fot12, fen21);
+if (r == 4)
+fot12.attack4(fot12, fen21);
+}
+if (fen21.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (fen21.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, fot22);
+if (r == 2)
+fen21.attack2(fen21, fot22);
+if (r == 3)
+fen21.attack3(fen21, fot22);
+if (r == 4)
+fen21.attack4(fen21, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, fen21);
+if (r == 2)
+fot22.attack2(fot22, fen21);
+if (r == 3)
+fot22.attack3(fot22, fen21);
+if (r == 4)
+fot22.attack4(fot22, fen21);
+}
+if (fen21.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (fen21.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, hands12);
+if (r == 2)
+fen21.attack2(fen21, hands12);
+if (r == 3)
+fen21.attack3(fen21, hands12);
+if (r == 4)
+fen21.attack4(fen21, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, fen21);
+if (r == 2)
+hands12.attack2(hands12, fen21);
+if (r == 3)
+hands12.attack3(hands12, fen21);
+if (r == 4)
+hands12.attack4(hands12, fen21);
+}
+if (fen21.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (fen21.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, hands22);
+if (r == 2)
+fen21.attack2(fen21, hands22);
+if (r == 3)
+fen21.attack3(fen21, hands22);
+if (r == 4)
+fen21.attack4(fen21, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, fen21);
+if (r == 2)
+hands22.attack2(hands22, fen21);
+if (r == 3)
+hands22.attack3(hands22, fen21);
+if (r == 4)
+hands22.attack4(hands22, fen21);
+}
+if (fen21.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (fen21.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, fen12);
+if (r == 2)
+fen21.attack2(fen21, fen12);
+if (r == 3)
+fen21.attack3(fen21, fen12);
+if (r == 4)
+fen21.attack4(fen21, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, fen21);
+if (r == 2)
+fen12.attack2(fen12, fen21);
+if (r == 3)
+fen12.attack3(fen12, fen21);
+if (r == 4)
+fen12.attack4(fen12, fen21);
+}
+if (fen21.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (fen21.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, fen22);
+if (r == 2)
+fen21.attack2(fen21, fen22);
+if (r == 3)
+fen21.attack3(fen21, fen22);
+if (r == 4)
+fen21.attack4(fen21, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, fen21);
+if (r == 2)
+fen22.attack2(fen22, fen21);
+if (r == 3)
+fen22.attack3(fen22, fen21);
+if (r == 4)
+fen22.attack4(fen22, fen21);
+}
+if (fen21.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (fen21.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, ha12);
+if (r == 2)
+fen21.attack2(fen21, ha12);
+if (r == 3)
+fen21.attack3(fen21, ha12);
+if (r == 4)
+fen21.attack4(fen21, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, fen21);
+if (r == 2)
+ha12.attack2(ha12, fen21);
+if (r == 3)
+ha12.attack3(ha12, fen21);
+if (r == 4)
+ha12.attack4(ha12, fen21);
+}
+if (fen21.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (fen21.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen21.attack1(fen21, ha22);
+if (r == 2)
+fen21.attack2(fen21, ha22);
+if (r == 3)
+fen21.attack3(fen21, ha22);
+if (r == 4)
+fen21.attack4(fen21, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, fen21);
+if (r == 2)
+ha22.attack2(ha22, fen21);
+if (r == 3)
+ha22.attack3(ha22, fen21);
+if (r == 4)
+ha22.attack4(ha22, fen21);
+}
+if (fen21.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (fen21.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (fen21.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+if (i == 11)
+{ if (j == 1)
+{while (ha11.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, pr2);
+if (r == 2)
+ha11.attack2(ha11, pr2);
+if (r == 3)
+ha11.attack3(ha11, pr2);
+if (r == 4)
+ha11.attack4(ha11, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, ha11);
+if (r == 2)
+pr2.attack2(pr2, ha11);
+if (r == 3)
+pr2.attack3(pr2, ha11);
+if (r == 4)
+pr2.attack4(pr2, ha11);
+}
+if (ha11.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (ha11.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, ill2);
+if (r == 2)
+ha11.attack2(ha11, ill2);
+if (r == 3)
+ha11.attack3(ha11, ill2);
+if (r == 4)
+ha11.attack4(ha11, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, ha11);
+if (r == 2)
+ill2.attack2(ill2, ha11);
+if (r == 3)
+ill2.attack3(ill2, ha11);
+if (r == 4)
+ill2.attack4(ill2, ha11);
+}
+if (ha11.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (ha11.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, maf2);
+if (r == 2)
+ha11.attack2(ha11, maf2);
+if (r == 3)
+ha11.attack3(ha11, maf2);
+if (r == 4)
+ha11.attack4(ha11, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, ha11);
+if (r == 2)
+maf2.attack2(maf2, ha11);
+if (r == 3)
+maf2.attack3(maf2, ha11);
+if (r == 4)
+maf2.attack4(maf2, ha11);
+}
+if (ha11.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (ha11.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, ya2);
+if (r == 2)
+ha11.attack2(ha11, ya2);
+if (r == 3)
+ha11.attack3(ha11, ya2);
+if (r == 4)
+ha11.attack4(ha11, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, ha11);
+if (r == 2)
+ya2.attack2(ya2, ha11);
+if (r == 3)
+ya2.attack3(ya2, ha11);
+if (r == 4)
+ya2.attack4(ya2, ha11);
+}
+if (ha11.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (ha11.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, fot12);
+if (r == 2)
+ha11.attack2(ha11, fot12);
+if (r == 3)
+ha11.attack3(ha11, fot12);
+if (r == 4)
+ha11.attack4(ha11, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, ha11);
+if (r == 2)
+fot12.attack2(fot12, ha11);
+if (r == 3)
+fot12.attack3(fot12, ha11);
+if (r == 4)
+fot12.attack4(fot12, ha11);
+}
+if (ha11.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (ha11.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, fot22);
+if (r == 2)
+ha11.attack2(ha11, fot22);
+if (r == 3)
+ha11.attack3(ha11, fot22);
+if (r == 4)
+ha11.attack4(ha11, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, ha11);
+if (r == 2)
+fot22.attack2(fot22, ha11);
+if (r == 3)
+fot22.attack3(fot22, ha11);
+if (r == 4)
+fot22.attack4(fot22, ha11);
+}
+if (ha11.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (ha11.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, hands12);
+if (r == 2)
+ha11.attack2(ha11, hands12);
+if (r == 3)
+ha11.attack3(ha11, hands12);
+if (r == 4)
+ha11.attack4(ha11, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, ha11);
+if (r == 2)
+hands12.attack2(hands12, ha11);
+if (r == 3)
+hands12.attack3(hands12, ha11);
+if (r == 4)
+hands12.attack4(hands12, ha11);
+}
+if (ha11.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (ha11.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, hands22);
+if (r == 2)
+ha11.attack2(ha11, hands22);
+if (r == 3)
+ha11.attack3(ha11, hands22);
+if (r == 4)
+ha11.attack4(ha11, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, ha11);
+if (r == 2)
+hands22.attack2(hands22, ha11);
+if (r == 3)
+hands22.attack3(hands22, ha11);
+if (r == 4)
+hands22.attack4(hands22, ha11);
+}
+if (ha11.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (ha11.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, fen12);
+if (r == 2)
+ha11.attack2(ha11, fen12);
+if (r == 3)
+ha11.attack3(ha11, fen12);
+if (r == 4)
+ha11.attack4(ha11, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, ha11);
+if (r == 2)
+fen12.attack2(fen12, ha11);
+if (r == 3)
+fen12.attack3(fen12, ha11);
+if (r == 4)
+fen12.attack4(fen12, ha11);
+}
+if (ha11.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (ha11.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, fen22);
+if (r == 2)
+ha11.attack2(ha11, fen22);
+if (r == 3)
+ha11.attack3(ha11, fen22);
+if (r == 4)
+ha11.attack4(ha11, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, ha11);
+if (r == 2)
+fen22.attack2(fen22, ha11);
+if (r == 3)
+fen22.attack3(fen22, ha11);
+if (r == 4)
+fen22.attack4(fen22, ha11);
+}
+if (ha11.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (ha11.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, ha12);
+if (r == 2)
+ha11.attack2(ha11, ha12);
+if (r == 3)
+ha11.attack3(ha11, ha12);
+if (r == 4)
+ha11.attack4(ha11, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, ha11);
+if (r == 2)
+ha12.attack2(ha12, ha11);
+if (r == 3)
+ha12.attack3(ha12, ha11);
+if (r == 4)
+ha12.attack4(ha12, ha11);
+}
+if (ha11.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (ha11.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha11.attack1(ha11, ha22);
+if (r == 2)
+ha11.attack2(ha11, ha22);
+if (r == 3)
+ha11.attack3(ha11, ha22);
+if (r == 4)
+ha11.attack4(ha11, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, ha11);
+if (r == 2)
+ha22.attack2(ha22, ha11);
+if (r == 3)
+ha22.attack3(ha22, ha11);
+if (r == 4)
+ha22.attack4(ha22, ha11);
+}
+if (ha11.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha11.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha11.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+
+if (i == 12)
+{ if (j == 1)
+{while (ha21.current_inspiration > 0 && pr2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, pr2);
+if (r == 2)
+ha21.attack2(ha21, pr2);
+if (r == 3)
+ha21.attack3(ha21, pr2);
+if (r == 4)
+ha21.attack4(ha21, pr2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+pr2.attack1(pr2, ha21);
+if (r == 2)
+pr2.attack2(pr2, ha21);
+if (r == 3)
+pr2.attack3(pr2, ha21);
+if (r == 4)
+pr2.attack4(pr2, ha21);
+}
+if (ha21.current_inspiration < 0 && pr2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && pr2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && pr2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+}
+
+if (j == 2)
+	{
+		while (ha21.current_inspiration > 0 && ill2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, ill2);
+if (r == 2)
+ha21.attack2(ha21, ill2);
+if (r == 3)
+ha21.attack3(ha21, ill2);
+if (r == 4)
+ha21.attack4(ha21, ill2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ill2.attack1(ill2, ha21);
+if (r == 2)
+ill2.attack2(ill2, ha21);
+if (r == 3)
+ill2.attack3(ill2, ha21);
+if (r == 4)
+ill2.attack4(ill2, ha21);
+}
+if (ha21.current_inspiration < 0 && ill2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && ill2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && ill2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 3)
+	{
+		while (ha21.current_inspiration > 0 && maf2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, maf2);
+if (r == 2)
+ha21.attack2(ha21, maf2);
+if (r == 3)
+ha21.attack3(ha21, maf2);
+if (r == 4)
+ha21.attack4(ha21, maf2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+maf2.attack1(maf2, ha21);
+if (r == 2)
+maf2.attack2(maf2, ha21);
+if (r == 3)
+maf2.attack3(maf2, ha21);
+if (r == 4)
+maf2.attack4(maf2, ha21);
+}
+if (ha21.current_inspiration < 0 && maf2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && maf2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && maf2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 4)
+	{
+		while (ha21.current_inspiration > 0 && ya2.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, ya2);
+if (r == 2)
+ha21.attack2(ha21, ya2);
+if (r == 3)
+ha21.attack3(ha21, ya2);
+if (r == 4)
+ha21.attack4(ha21, ya2);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ya2.attack1(ya2, ha21);
+if (r == 2)
+ya2.attack2(ya2, ha21);
+if (r == 3)
+ya2.attack3(ya2, ha21);
+if (r == 4)
+ya2.attack4(ya2, ha21);
+}
+if (ha21.current_inspiration < 0 && ya2.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && ya2.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && ya2.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 5)
+	{
+		while (ha21.current_inspiration > 0 && fot12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, fot12);
+if (r == 2)
+ha21.attack2(ha21, fot12);
+if (r == 3)
+ha21.attack3(ha21, fot12);
+if (r == 4)
+ha21.attack4(ha21, fot12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot12.attack1(fot12, ha21);
+if (r == 2)
+fot12.attack2(fot12, ha21);
+if (r == 3)
+fot12.attack3(fot12, ha21);
+if (r == 4)
+fot12.attack4(fot12, ha21);
+}
+if (ha21.current_inspiration < 0 && fot12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && fot12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && fot12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+if (j == 6)
+	{
+		while (ha21.current_inspiration > 0 && fot22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, fot22);
+if (r == 2)
+ha21.attack2(ha21, fot22);
+if (r == 3)
+ha21.attack3(ha21, fot22);
+if (r == 4)
+ha21.attack4(ha21, fot22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fot22.attack1(fot22, ha21);
+if (r == 2)
+fot22.attack2(fot22, ha21);
+if (r == 3)
+fot22.attack3(fot22, ha21);
+if (r == 4)
+fot22.attack4(fot22, ha21);
+}
+if (ha21.current_inspiration < 0 && fot22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && fot22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && fot22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 7)
+	{
+		while (ha21.current_inspiration > 0 && hands12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, hands12);
+if (r == 2)
+ha21.attack2(ha21, hands12);
+if (r == 3)
+ha21.attack3(ha21, hands12);
+if (r == 4)
+ha21.attack4(ha21, hands12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands12.attack1(hands12, ha21);
+if (r == 2)
+hands12.attack2(hands12, ha21);
+if (r == 3)
+hands12.attack3(hands12, ha21);
+if (r == 4)
+hands12.attack4(hands12, ha21);
+}
+if (ha21.current_inspiration < 0 && hands12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && hands12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && hands12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 8)
+	{
+		while (ha21.current_inspiration > 0 && hands22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, hands22);
+if (r == 2)
+ha21.attack2(ha21, hands22);
+if (r == 3)
+ha21.attack3(ha21, hands22);
+if (r == 4)
+ha21.attack4(ha21, hands22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+hands22.attack1(hands22, ha21);
+if (r == 2)
+hands22.attack2(hands22, ha21);
+if (r == 3)
+hands22.attack3(hands22, ha21);
+if (r == 4)
+hands22.attack4(hands22, ha21);
+}
+if (ha21.current_inspiration < 0 && hands22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && hands22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && hands22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 9)
+	{
+		while (ha21.current_inspiration > 0 && fen12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, fen12);
+if (r == 2)
+ha21.attack2(ha21, fen12);
+if (r == 3)
+ha21.attack3(ha21, fen12);
+if (r == 4)
+ha21.attack4(ha21, fen12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen12.attack1(fen12, ha21);
+if (r == 2)
+fen12.attack2(fen12, ha21);
+if (r == 3)
+fen12.attack3(fen12, ha21);
+if (r == 4)
+fen12.attack4(fen12, ha21);
+}
+if (ha21.current_inspiration < 0 && fen12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && fen12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && fen12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+if (j == 10)
+	{
+		while (ha21.current_inspiration > 0 && fen22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, fen22);
+if (r == 2)
+ha21.attack2(ha21, fen22);
+if (r == 3)
+ha21.attack3(ha21, fen22);
+if (r == 4)
+ha21.attack4(ha21, fen22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+fen22.attack1(fen22, ha21);
+if (r == 2)
+fen22.attack2(fen22, ha21);
+if (r == 3)
+fen22.attack3(fen22, ha21);
+if (r == 4)
+fen22.attack4(fen22, ha21);
+}
+if (ha21.current_inspiration < 0 && fen22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && fen22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && fen22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 11)
+	{
+		while (ha21.current_inspiration > 0 && ha12.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, ha12);
+if (r == 2)
+ha21.attack2(ha21, ha12);
+if (r == 3)
+ha21.attack3(ha21, ha12);
+if (r == 4)
+ha21.attack4(ha21, ha12);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha12.attack1(ha12, ha21);
+if (r == 2)
+ha12.attack2(ha12, ha21);
+if (r == 3)
+ha12.attack3(ha12, ha21);
+if (r == 4)
+ha12.attack4(ha12, ha21);
+}
+if (ha21.current_inspiration < 0 && ha12.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && ha12.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && ha12.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+
+
+if (j == 12)
+	{
+		while (ha21.current_inspiration > 0 && ha22.current_inspiration > 0)
+{cout << "Введите число от 1 до 4, чтобы выбрать атаку для первой канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha21.attack1(ha21, ha22);
+if (r == 2)
+ha21.attack2(ha21, ha22);
+if (r == 3)
+ha21.attack3(ha21, ha22);
+if (r == 4)
+ha21.attack4(ha21, ha22);
+cout << "Введите число от 1 до 4, чтобы выбрать атаку для второй канарейки";
+cout << endl;
+cin >> r;
+if (r == 1)
+ha22.attack1(ha22, ha21);
+if (r == 2)
+ha22.attack2(ha22, ha21);
+if (r == 3)
+ha22.attack3(ha22, ha21);
+if (r == 4)
+ha22.attack4(ha22, ha21);
+}
+if (ha21.current_inspiration < 0 && ha22.current_inspiration < 0)
+	cout << "Победила дружба";
+if (ha21.current_inspiration > 0 && ha22.current_inspiration <= 0)
+	cout << "Победила первая канарейка";
+if (ha21.current_inspiration <= 0 && ha22.current_inspiration > 0)
+	cout << "Победила вторая канарейка";
+
+}
+
+}
+
+cin >> a;
+return 0;
+}
