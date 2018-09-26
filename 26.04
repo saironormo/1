@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <regex>
+using namespace std;
+
+
+int main() {
+	freopen("C:\\123\\textin.txt", "r", stdin); 
+	 freopen("C:\\123\\textout.txt", "w", stdout); 
+	char *b(new char);
+	regex http("http://");
+	while (true)
+	{  if (gets(b))
+		puts(regex_replace(b, http, "https://").c_str());
+	else
+		break;
+	}
+
+	return 0;
+}
