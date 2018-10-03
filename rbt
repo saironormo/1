@@ -1,0 +1,203 @@
+
+#include <iostream>
+#include <cstdio>
+using namespace std; 
+
+
+struct node
+{
+public:
+	int data;
+	bool black;
+	node *left, *right, *parent;
+	node (int d)
+	{
+		this->data = d;
+		left = right = parent = NULL;
+	}
+};
+
+
+struct tree
+{
+public:
+	node *root;
+
+
+	tree()
+	{
+		root = NULL;
+	}
+
+
+	void rotleft(node *&a, node *&b)
+		{ 
+    node *c = b->right; 
+  
+    b->right = c->left; 
+  
+    if (b->right != NULL) 
+        b->right->parent = b; 
+  
+    c->parent = b->parent; 
+  
+    if (b->parent == NULL) 
+        a = c; 
+  
+    else if (b == b->parent->left) 
+        b->parent->left = c; 
+  
+    else
+       b->parent->right = c; 
+  
+   c->left = b; 
+    b->parent = c; 
+} 
+
+	void rotright(node *&a, node *&b)
+		{ 
+    node *c = b->left; 
+  
+    b->left = c->right; 
+  
+    if (b->left != NULL) 
+        b->left->parent = b; 
+  
+    c->parent = b->parent; 
+  
+    if (b->parent == NULL) 
+        a = c; 
+  
+    else if (b == b->parent->left) 
+        b->parent->left = c; 
+  
+    else
+       b->parent->right = c; 
+  
+   c->right = b; 
+    b->parent = c; 
+} 
+
+	node* insert (node* root, node *q)
+	{
+
+		if (root == NULL)
+		{
+			return q;
+		}
+		 if (q->data < root->data) 
+    { 
+        root->left  = insert(root->left, q); 
+        root->left->parent = root; 
+    } 
+    else if (q->data >= root->data) 
+    { 
+        root->right = insert(root->right, q); 
+        root->right->parent = root; 
+    } 
+    return root; 
+	}
+
+	 void insert(int d)
+		 {		
+			node *q = new node(d);
+		 root = insert (root, q);
+		 fix(root, q);
+		 }
+  
+
+
+	 void fix(node *&root, node *&q)
+	 {
+		 node *qsparent = NULL;
+		 node *qsparentsparent = NULL;
+
+		   while ((q != root) && (q->black != 1) && (q->parent->black == 0)) 
+    { 
+  
+        qsparent = q->parent; 
+        qsparentsparent = q->parent->parent; 
+
+        if (qsparent == qsparentsparent->left) 
+        { 
+  
+            node *qsuncle = qsparentsparent->right; 
+  
+            if (qsuncle!= NULL && qsuncle->black == 0) 
+            { 
+                qsparentsparent->black = 0; 
+                qsparent->black = 1; 
+                qsuncle->black = 1; 
+                q = qsparentsparent; 
+            } 
+  
+            else
+            {
+                if (q == qsparent->right) 
+                { 
+                    rotleft(root, qsparent); 
+                    q = qsparent; 
+                    qsparent = q->parent; 
+                } 
+  
+                rotright(root, qsparentsparent); 
+				
+				node *t = qsparent;
+				qsparent->black = qsparentsparent->black;
+				qsparentsparent->black = t->black;
+                delete t;
+                q = qsparent; 
+            } 
+        } 
+  
+        else
+        { 
+            node *uncle_pt = qsparentsparent->left; 
+ 
+            if ((uncle_pt != NULL) && (uncle_pt->black == 0)) 
+            { 
+               qsparentsparent->black = 0; 
+                qsparent->black = 1; 
+                uncle_pt->black = 1; 
+                q = qsparentsparent; 
+            } 
+            else
+            {
+                if (q == qsparent->left) 
+                { 
+                    rotright(root, qsparent); 
+                    q = qsparent; 
+                   qsparent = q->parent; 
+                } 
+
+                rotleft(root, qsparentsparent); 
+				
+				node *t = qsparent;
+				qsparent->black = qsparentsparent->black;
+				qsparentsparent->black = t->black;
+                delete t;
+                q = qsparent; 
+            } 
+        } 
+    } 
+  
+    root->black = 1; 
+} 
+
+
+	 void out(node *root)
+	 {
+		 if (root == NULL)
+			 return;
+		 cout << root->data << endl;
+		 out(root->left);
+		out(root ->right);
+	 }
+	 void out()
+	 {
+		 out(root);
+	 }
+
+
+
+	 };
